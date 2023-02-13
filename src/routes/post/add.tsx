@@ -5,7 +5,7 @@ const titleLength = 20
 const contentLength = 180
 
 export default function AddPost() {
-  const [enrolling, { Form }] = createServerAction$(
+  const [addingPost, { Form }] = createServerAction$(
     async (formData: FormData) => {
       const title = formData.get("title") as string
       const content = formData.get("content") as string
@@ -27,7 +27,7 @@ export default function AddPost() {
     <main>
       <div class="flex items-baseline justify-between">
         <h1 class="text-3xl font-bold">Add Post</h1>
-        <p class="text-sm text-red-600">{enrolling.error}</p>
+        <p class="text-sm text-red-600">{addingPost.error}</p>
       </div>
       <Form class="my-8 grid gap-y-4 text-gray-700">
         <div class="grid gap-y-2">
@@ -56,7 +56,7 @@ export default function AddPost() {
         </div>
         <button
           type="submit"
-          disabled={enrolling.pending}
+          disabled={addingPost.pending}
           class="mt-2 self-end rounded-md bg-gray-600 px-4 py-2 text-gray-50 transition-colors hover:bg-gray-500"
         >
           Submit
