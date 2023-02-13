@@ -1,9 +1,10 @@
 {
   "name": "solid-prisma-planetscale",
   "scripts": {
-    "dev": "solid-start dev",
-    "build": "solid-start build",
-    "start": "solid-start start"
+    "dev": "pnpm generate && solid-start dev",
+    "build": "pnpm generate && solid-start build",
+    "start": "solid-start start",
+    "generate": "prisma generate"
   },
   "type": "module",
   "devDependencies": {
@@ -11,6 +12,7 @@
     "postcss": "^8.4.21",
     "prettier": "^2.8.4",
     "prettier-plugin-tailwindcss": "^0.2.2",
+    "prisma": "^4.10.1",
     "solid-start-node": "^0.2.19",
     "tailwindcss": "^3.2.4",
     "typescript": "^4.9.4",
