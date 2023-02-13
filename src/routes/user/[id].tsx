@@ -6,8 +6,8 @@ import prisma from "~/lib/prisma"
 export default function User() {
   const params = useParams<{ id: string }>()
   const user = createServerData$(
-    ([, id]) =>
-      prisma.user.findUnique({
+    async ([, id]) =>
+      await prisma.user.findUnique({
         where: {
           id: Number(id),
         },
