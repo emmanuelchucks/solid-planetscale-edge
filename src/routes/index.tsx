@@ -1,11 +1,11 @@
 import { For } from "solid-js"
 import { A } from "solid-start"
 import { createServerData$ } from "solid-start/server"
-import prisma from "~/lib/prisma"
+import db from "~/lib/db"
 
 export default function Home() {
-  const users = createServerData$(async () => {
-    return await prisma.user.findMany()
+  const users = createServerData$(async (_, { env }) => {
+    return await db(env).selectFrom("User").selectAll().execute()
   })
 
   return (

@@ -1,24 +1,29 @@
 import { createServerAction$, redirect } from "solid-start/server"
-import prisma from "~/lib/prisma"
+import db from "~/lib/db"
 
 const titleLength = 20
 const contentLength = 180
 
 export default function AddPost() {
   const [addingPost, { Form }] = createServerAction$(
-    async (formData: FormData) => {
+    async (formData: FormData, { env }) => {
       const title = formData.get("title") as string
       const content = formData.get("content") as string
       if (!title) throw "Title is required"
       if (title.length > titleLength) throw "Title is too long"
       if (content.length > contentLength) throw "Content is too long"
-      await prisma.post.create({
-        data: {
+      await db(env)
+        .insertInto("Post")
+        .values({
+          authorId: 1,
           title,
           content,
-          authorId: 1,
-        },
-      })
+          id: 0,
+          published: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        })
+        .execute()
       return redirect("/user/1")
     }
   )
