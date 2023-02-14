@@ -18,6 +18,7 @@ export default function db(env: Env) {
       host: env.DATABASE_HOST,
       username: env.DATABASE_USERNAME,
       password: env.DATABASE_PASSWORD,
+      useSharedConnection: true,
     }),
   })
 }
