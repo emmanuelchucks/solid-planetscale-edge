@@ -1,10 +1,12 @@
 {
   "name": "solid-prisma-planetscale",
   "scripts": {
-    "dev": "pnpm generate && solid-start dev",
-    "build": "pnpm generate && solid-start build",
+    "dev": "pnpm generate:dev && solid-start dev",
+    "build": "pnpm generate:prisma && solid-start build",
     "start": "solid-start start",
-    "generate": "prisma generate"
+    "generate:dev": "pnpm generate:prisma && pnpm generate:db-types",
+    "generate:prisma": "prisma generate --data-proxy",
+    "generate:db-types": "node ./scripts/generate-db-types.js"
   },
   "type": "module",
   "devDependencies": {
