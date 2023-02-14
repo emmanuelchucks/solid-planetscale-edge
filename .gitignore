@@ -25,3 +25,7 @@ Thumbs.db
 
 # Environment Variables
 .env
+.dev.vars
+
+# Miniflare
+functions

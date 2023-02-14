@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client"
-
-declare global {
-  var prismaClient: PrismaClient
+interface Env {
+  DATABASE_HOST?: string
+  DATABASE_USERNAME?: string
+  DATABASE_PASSWORD?: string
 }

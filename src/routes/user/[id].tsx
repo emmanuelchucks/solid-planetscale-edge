@@ -1,20 +1,18 @@
 import { For } from "solid-js"
 import { A, useParams } from "solid-start"
 import { createServerData$ } from "solid-start/server"
-import prisma from "~/lib/prisma"
+import db from "~/lib/db"
 
 export default function User() {
   const params = useParams<{ id: string }>()
-  const user = createServerData$(
-    async ([, id]) =>
-      await prisma.user.findUnique({
-        where: {
-          id: Number(id),
-        },
-        include: {
-          posts: true,
-        },
-      }),
+  const posts = createServerData$(
+    async ([, id], { env }) =>
+      await db(env)
+        .selectFrom("Post")
+        .innerJoin("User", "User.id", "authorId")
+        .select(["title", "content", "User.name as authorName"])
+        .where("authorId", "=", Number(id))
+        .execute(),
     {
       key: () => ["user", params.id],
     }
@@ -23,7 +21,7 @@ export default function User() {
   return (
     <main>
       <div class="flex items-baseline justify-between">
-        <h1 class="text-3xl font-bold">{user()?.name}</h1>
+        <h1 class="text-3xl font-bold">{posts()?.[0].authorName}</h1>
         <A
           href="/post/add"
           class="rounded-md bg-gray-200 px-4 transition-colors hover:bg-gray-300"
@@ -32,7 +30,7 @@ export default function User() {
         </A>
       </div>
       <ul class="my-8 space-y-4 text-gray-700">
-        <For each={user()?.posts}>
+        <For each={posts()}>
           {(post) => (
             <li>
               <p class="font-semibold">{post.title}</p>
