@@ -15,12 +15,9 @@ export default function AddPost() {
       await db(env)
         .insertInto("Post")
         .values({
-          authorId: 1,
           title,
           content,
-          id: 0,
-          published: false,
-          createdAt: new Date(),
+          authorId: 1,
           updatedAt: new Date(),
         })
         .execute()
