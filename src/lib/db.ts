@@ -6,18 +6,14 @@ export default function db(env: Env) {
   if (import.meta.env.DEV) {
     return new Kysely<DB>({
       dialect: new PlanetScaleDialect({
-        host: process.env.DATABASE_HOST,
-        username: process.env.DATABASE_USERNAME,
-        password: process.env.DATABASE_PASSWORD,
+        url: process.env.DATABASE_URL,
       }),
     })
   }
 
   return new Kysely<DB>({
     dialect: new PlanetScaleDialect({
-      host: env.DATABASE_HOST,
-      username: env.DATABASE_USERNAME,
-      password: env.DATABASE_PASSWORD,
+      url: env.DATABASE_URL,
       useSharedConnection: true,
     }),
   })
