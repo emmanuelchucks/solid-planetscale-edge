@@ -17,7 +17,7 @@ export default function Root() {
   return (
     <Html lang="en">
       <Head>
-        <Title>SolidStart - Prisma & Planetscale</Title>
+        <Title>SolidStart - PlanetScale at the Edge</Title>
         <Meta charset="utf-8" />
         <Meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
