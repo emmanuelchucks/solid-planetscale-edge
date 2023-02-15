@@ -1,11 +1,12 @@
 {
   "name": "solid-planetscale-edge",
   "scripts": {
-    "dev": "pnpm db:generate && solid-start dev",
+    "dev": "solid-start dev",
     "build": "solid-start build",
     "start": "solid-start start",
-    "db:push": "prisma db push --skip-generate",
-    "db:generate": "kysely-codegen --url 'mysql://root@127.0.0.1:3306'"
+    "push": "prisma db push --skip-generate",
+    "generate": "kysely-codegen --url 'mysql://root@127.0.0.1:3306'",
+    "connect": "pscale connect solid-planetscale-edge --execute 'pnpm generate'"
   },
   "type": "module",
   "devDependencies": {
