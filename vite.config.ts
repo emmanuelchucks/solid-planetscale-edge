@@ -5,7 +5,9 @@ import { defineConfig } from "vite"
 export default defineConfig({
   plugins: [
     solid({
-      adapter: cloudflarePages({}),
+      adapter: cloudflarePages({
+        envPath: true,
+      }),
     }),
   ],
 })
